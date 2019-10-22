@@ -306,20 +306,20 @@ class World():  ####base world
             self.health_mat[(cel[0], cel[1], 0)] = self.pre_discovery_health
             self.health_mat[(cel[0], cel[1], 1)] = self.decayAmount(stage = 1)
             self.situation[cel] = Cell.victim_critical 
-            self.attrList[Cell.victim_critical].append(cel)
-            self.victims_under_debris.remove(cel)
+            self.attrList[Cell.victim_critical].append(list(cel))
+            self.victims_under_debris.remove(list(cel))
         else:
             self.situation[cel] = Cell.vacant
         
-        self.attrList[Cell.debris].remove(cel)
+        self.attrList[Cell.debris].remove(list(cel))
         
         
     def on_clear_blockage(self, cel):
         
         self.situation[cel] = Cell.unknown
-        self.attrList[Cell.unknown].append(cel)
+        self.attrList[Cell.unknown].append(list(cel))
         
-        self.attrList[Cell.path_blockage].remove(cel)
+        self.attrList[Cell.path_blockage].remove(list(cel))
         
 
         

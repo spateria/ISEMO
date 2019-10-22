@@ -24,7 +24,7 @@ class OptionControl:
 
         # Different choices are possible for the critic. Here we learn an
         # option-value function and use the estimator for the values upon arrival
-        self.critic = u.TaskLevelQLearningMAXQ(self.discount, self.lr_critic,  self.estimator)
+        self.critic = u.CoHRLCritic(self.discount, self.lr_critic,  self.estimator)
 
         
 

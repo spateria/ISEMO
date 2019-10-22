@@ -157,16 +157,18 @@ def runISEMO(args, fileidx, noISER = None):
                             print("OPTION:", option[i])
                             print("VALS:", agents[i].mu.policy.value(phi[i]), '\n')
          
+                    
                     step_out[i] = agents[i].stepLevel1(option[i])   ##### agent takes an action as per the given option, attributes of the World change                            
-
+                    
 
                 ########################################################################################
                 
                 ISER = np.zeros(nagents)
                 for i in range(nagents):
                     termit = 1
+                    
                     next_state, ISER_to = agents[i].env.update(agents[i].Loc, agents[i].id, step_out[i], termit)       #### update the observed features according to the new World state 
-                                                                                                                     #### also checks the precondition enabling (or empowerment)           
+                                                                                                                    #### also checks the precondition enabling (or empowerment)           
                     last_phi[i] = copy.deepcopy(phi[i])                                                                        
                     phi[i] = copy.deepcopy(next_state)
                     
@@ -195,7 +197,8 @@ def runISEMO(args, fileidx, noISER = None):
                             termit = 1
                             oprev[i] = option[i]
                             
-                            option[i] = agents[i].mu.policy.sample(phi[i])   
+                            option[i] = agents[i].mu.policy.sample(phi[i])  
+                             
                             if args.testing: option_probas[i].append(tuple(agents[i].mu.policy.get_output_probas(phi[i])))
 
                             option_switches[i] += 1
@@ -218,6 +221,7 @@ def runISEMO(args, fileidx, noISER = None):
                                 eta = args.eta
                                 
                             agents[i].mu.termination_improvement.update(phi[i], option[i], eta)
+                            
                 ####################################################################################################
 
 

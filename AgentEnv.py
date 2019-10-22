@@ -42,9 +42,6 @@ class Agent_Environment:
         self.currentcell = self.w.validcells[np.random.choice(len(self.w.validcells))]   
             
         self.startcell = self.currentcell
-        
-
-
 
         self.state_centroids = []
         
@@ -64,13 +61,14 @@ class Agent_Environment:
                     b = j*kernel_size + int(kernel_size/2)
                     
                     self.state_centroids.append([a, b])
-
-            
-            
-   
         
         self.option_space_kernels()
-
+        
+        ##### the following could be done in situupdate() but it slows down the process significantly
+        self.unknownmap = [0 for x in range(len(self.state_centroids))]  
+        for p in self.w.attrList[Cell.unknown]:
+            C, ksite, _ =   self.find_feature_membership_kernel(p)              
+            self.unknownmap[ksite] += 1 / (self.kernel_size**2)   #### there are kernel_size**2 number of cells in one block..so the unknown value represents how many cells are unknown
 
 
 
@@ -174,6 +172,8 @@ class Agent_Environment:
         
     def update(self, loc, agent_id, option, termit):  ### primitive step
    
+        
+        
         if termit:
             old_situ = copy.deepcopy(self.situ)      
             old_agent_sites = copy.deepcopy(self.agents_sites)  ## site number of agents
@@ -181,10 +181,10 @@ class Agent_Environment:
             old_criticalvictim_map = copy.deepcopy(self.criticalvictim_map)  ### count
             old_stablevictim_map = copy.deepcopy(self.stablevictim_map)    ### count
                                              
-
+        
         self.situupdate(loc) ############# features will change now ###############################
         
-        
+        #start = time.time()
         ISER_to = []
         
         #### precondition checks ########################################################################
@@ -229,6 +229,10 @@ class Agent_Environment:
             
         next_state = self.getstate()      #### new state
 
+        #end = time.time()
+        
+        #print(end-start)
+        
         return next_state, ISER_to
 
 
@@ -272,7 +276,7 @@ class Agent_Environment:
 
     def situupdate(self, Loc):
         
-        start = time.time()
+        #start = time.time()
         
         self.situ = []
 
@@ -299,17 +303,20 @@ class Agent_Environment:
         self.situ.append(self.victims_for_relocation / self.maxreloc) #### capacity
         ################################################################################################
 
-
+        
+        
         ##### GLOBAL ATTRIBUTE CALCULATIONS ###############
         if 1:  ##### features for unknown regions
-            self.unknownmap = [0 for x in range(len(self.state_centroids))]  
-            for p in self.w.attrList[Cell.unknown]:
-                C, ksite, _ =   self.find_feature_membership_kernel(p)              
-                self.unknownmap[ksite] += 1 / (self.kernel_size**2)   #### there are kernel_size**2 number of cells in one block..so the unknown value represents how many cells are unknown
-         
+            for p in self.w.scanlist:             
+                C, ksite, kernel_size = self.find_feature_membership_kernel(p)             
+                self.unknownmap[ksite] -= 1 / (kernel_size**2)
+           
             self.situ += self.unknownmap
             
-           
+        #end = time.time()        
+        #print(end-start)
+        
+        #start = time.time()
         utopia_value = 0.0 ### everything is fine,there are no victims
         
         if 1: ##### features for critical victims            
@@ -389,6 +396,7 @@ class Agent_Environment:
             self.situ += tempavghealth
         
         
+        
         if 1:
             self.is_debris = [0 for x in range(len(self.state_centroids))]
             self.is_blockage = [0 for x in range(len(self.state_centroids))]
@@ -406,7 +414,8 @@ class Agent_Environment:
             self.situ += self.is_blockage
         
     
-            
+        
+        
         ####### Observe other agents ##################
         self.agents_sites = []
         for i in range(len(self.w.agentTable)): #### iterate over agents
@@ -423,7 +432,8 @@ class Agent_Environment:
             
                 self.agents_sites.append(kernel_site)
             
-            
+        
+        
         ###### Co-ordination features ##################
         if self.args.coop:
             for i in range(len(self.w.agentTable)): #### iterate over agents
@@ -446,8 +456,7 @@ class Agent_Environment:
         #######################################
         self.option_space_update()
         
-        end = time.time()
-        
+        #end = time.time()        
         #print(end-start)
 
         #print(self.situ)

@@ -235,7 +235,7 @@ class Skills():
         for sn in self.surround:
                 cel = tuple(self.cag.Loc + sn)
                 if self.cag.env.w.situation[cel] == Cell.debris:
-                    self.cag.env.w.on_clear_debris(list(cel))
+                    self.cag.env.w.on_clear_debris(cel)
                     
                     
     def clear_blockage(self):
@@ -243,5 +243,5 @@ class Skills():
         for sn in self.surround:
                 cel = tuple(self.cag.Loc + sn)
                 if self.cag.env.w.situation[cel] == Cell.path_blockage:
-                    self.cag.env.w.on_clear_blockage(list(cel))
+                    self.cag.env.w.on_clear_blockage(cel)
                     
