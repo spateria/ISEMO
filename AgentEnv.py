@@ -48,7 +48,8 @@ class Agent_Environment:
 
         self.state_centroids = []
         
-        self.n = int(np.sqrt(100))
+        self.num_blocks = 100
+        self.n = int(np.sqrt(self.num_blocks))
         
         #print('state resolution: ', self.n)
 
@@ -78,9 +79,9 @@ class Agent_Environment:
         ###################### option space kernels ####################################
         self.option_centroids = [[] for x in range(5)]
         
-        self.n1 = int(np.sqrt(100))
-        self.n2 = int(np.sqrt(100))
-        self.n3 = int(np.sqrt(100))
+        self.n1 = int(np.sqrt(self.num_blocks))
+        self.n2 = int(np.sqrt(self.num_blocks))
+        self.n3 = int(np.sqrt(self.num_blocks))
         
 
         if 1:
@@ -223,7 +224,8 @@ class Agent_Environment:
         
         if ISER_to != []:
             ISER_to = list(set(ISER_to))  ### remove duplicates
-            
+            print(ISER_to)
+            sys.exit()
             
         next_state = self.getstate()      #### new state
 
@@ -233,8 +235,10 @@ class Agent_Environment:
     def get_agents_in_proximity_of(self, site, agent_sites):
         
         iser_to = []
+        n = self.n
+        proximity_sites = [site, site-1 , site+1, site+n, site+n-1, site+n+1, site-n, site-n-1, site-n+1]
         for i in range(len(agent_sites)):
-            if agent_sites[i] == site:
+            if (agent_sites[i] in proximity_sites):
                 iser_to.append(i)
                 
         return iser_to
