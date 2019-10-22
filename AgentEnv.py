@@ -224,8 +224,8 @@ class Agent_Environment:
         
         if ISER_to != []:
             ISER_to = list(set(ISER_to))  ### remove duplicates
-            print(ISER_to)
-            sys.exit()
+            #print(ISER_to)
+            #sys.exit()
             
         next_state = self.getstate()      #### new state
 
