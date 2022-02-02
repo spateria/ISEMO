@@ -28,4 +28,6 @@ By default, this runs ISEMO. To run CoHRL instead, give the following command:
 
 `python main.py −−runCoHRL`
 
+During training, data is saved in files with the names as: _historyISEMO_testingFalse_.npy_ when using ISEMO. The list of data items saved can be checked inISEMO.py(refer to the multi-dimensional arrayhistory)
+
 Please refer to ISEMO_SW_Doc.pdf for details and instructions.
