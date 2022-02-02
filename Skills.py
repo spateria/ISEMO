@@ -1,4 +1,4 @@
-import numpy as np
+import numpy as np 
 from Utils import Cell, edist
 from astar import astar
 import copy, sys
