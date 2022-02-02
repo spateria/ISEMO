@@ -1,4 +1,4 @@
-import numpy as np
+import numpy as np 
 from scipy.special import expit
 from scipy.misc import logsumexp
 import sys, os, time
