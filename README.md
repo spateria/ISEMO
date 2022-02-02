@@ -5,7 +5,7 @@ In the complex multi-agent tasks, various agents must cooperate to distribute re
 # Baseline method is Cooperative HRL (CoHRL) 
 Ghavamzadeh, Mohammad, Sridhar Mahadevan, and Rajbala Makar. "Hierarchical multi-agent reinforcement learning." Autonomous Agents and Multi-Agent Systems 13.2 (2006): 197-229.
 
-This code includes Python implementation of CoHRL
+This code includes Python implementation of CoHRL.
 
 # Dependencies
 Python >= 3.5.0
