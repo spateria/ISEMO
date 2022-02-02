@@ -17,11 +17,12 @@ scipy == 1.0.0
 opencv-python == 4.1.1.26
 
 # Setup before training
-Before training, it is required to make the _World_ objects. To make the _World_ objects, give the following command: 
+Before training, it is required to make the _World_ objects. A _World_ object contains attributes and configuration of the simulated Search & Rescue environment in which the multi-agent team is trained.  
+To make the _World_ objects, give the following command: 
 
 `python main.py --make` 
 
-The result will be saved in files named as MA-World-{i}.pl, where {i} ranges from _0_ to _nruns-1_. Here, _nruns_ is defined in the _args_ class in main.py.
+The result will be saved in files named as MA-World-{i}.pl, where {i} ranges from _0_ to _nruns-1_. Here, _nruns_ is defined in the _args_ class in main.py. In each run, the configuration of the _World_ changes (such as locations and/or numbers of certain objects)
 
 # Training mode
 To run the software in the training mode, give the following command:
