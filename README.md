@@ -28,6 +28,9 @@ By default, this runs ISEMO. To run CoHRL instead, give the following command:
 
 `python main.py −−runCoHRL`
 
-During training, data is saved in files with the names as: _historyISEMO\_testingFalse\_.npy_ when using ISEMO. The list of data items saved can be checked inISEMO.py(refer to the multi-dimensional arrayhistory)
+During training, data is saved in files with the names as: _historyISEMO\_testingFalse\_.npy_ when using ISEMO and _historyCoHRL\_testingFalse\_.npy_. 
+You can check the list of recorded data items in ISEMO.py(refer to the multi-dimensional arrayhistory). 
 
-Please refer to ISEMO_SW_Doc.pdf for details and instructions.
+The learned models for the Q-value functions and the termination functions are saved in the _models_ folder.
+
+Please refer to ISEMO_SW_Doc.pdf for more details.
