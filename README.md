@@ -1,6 +1,8 @@
 # ISEMO
 Multi-agent Reinforcement Learning in Spatial Domain Tasks using Inter Subtask Empowerment Rewards.
 
+# Baseline CoHRL
+
 # Dependencies
 Python >= 3.5.0
 
@@ -15,7 +17,15 @@ Before training, it is required to make the _World_ objects. To make the _World_
 
 `python main.py --make` 
 
-The result will be saved in files named as MA-World-{i}.pl, where _i_ ranges from _0_ to _nruns-1_. Here, _nruns_ is defined in the _args_ class in main.py.
+The result will be saved in files named as MA-World-{i}.pl, where {i} ranges from _0_ to _nruns-1_. Here, _nruns_ is defined in the _args_ class in main.py.
 
+# Training mode
+To run the software in the training mode, give the following command:
+
+`python main.py`  
+
+By default, this runs ISEMO. To run CoHRL instead, give the following command:
+
+`python main.py −−runCoHRL`
 
 Please refer to ISEMO_SW_Doc.pdf for details and instructions.
