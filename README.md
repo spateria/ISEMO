@@ -3,8 +3,11 @@ Multi-agent Reinforcement Learning in Spatial Domain Tasks using Inter Subtask E
 
 # Dependencies
 Python >= 3.5.0
+
 scikit-learn == 0.19.1
+
 scipy == 1.0.0
+
 opencv-python == 4.1.1.26
 
 # Setup before training
