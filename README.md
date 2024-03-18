@@ -49,4 +49,4 @@ To  run  the  software  in  thetesting mode,  give  the  following  command:
 Here, testID {i} is the index of the saved _World_ object (MA-World-{i}.pl) to be used for testing.
 
 # Further Details
-Please refer to ISEMO_SW_Doc.pdf for more details.
+Please refer to [ISEMO_SW_Doc.pdf](https://spateria.github.io/data/ISEMO_SW_Doc.pdf) for more details.
